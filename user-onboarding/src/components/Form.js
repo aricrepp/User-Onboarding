@@ -4,13 +4,30 @@ import axios from 'axios';
 import "./Form.css";
 import UserChunk from "./UserChunk.js";
 
+function linebreak(){
+  return(
+    <span>
+      <br/>
+    </span>
+  );
+}
+
 const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
     email: yup
       .string()
       .email("Must be a valid email address")
+      .test('email-taken', 'Email is taken', value => value !== "waffle@syrup.com")
       .required("Must include email address"),
-    password: yup.string().required("Must include why you'd like to join"),
+    password: yup.string()
+      // .when('$user', (user, passSchema) => user ? passSchema : passSchema.min(6, 'minimal password length is 6 characters'))
+      // .when('$user', (user, passSchema) => user ? passSchema : passSchema.max(15, 'maximum password length is 15 characters')
+      .matches(
+
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        `Must Contain 8 Characters One Uppercase, One Lowercase, One Number and One Special Case Character`,
+      )
+      .required(),
     role: yup.string().required("Must choose a role"),
     terms: yup.boolean().oneOf([true], "Please agree to terms of use")
   });

@@ -48,6 +48,7 @@ label {
 }
 
 .error {
+  width: 300px;
   color: red;
   margin-top: 0;
 }
