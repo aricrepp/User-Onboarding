@@ -10,6 +10,7 @@ const formSchema = yup.object().shape({
       .email("Must be a valid email address")
       .required("Must include email address"),
     password: yup.string().required("Must include why you'd like to join"),
+    role: yup.string().required("Must choose a role"),
     terms: yup.boolean().oneOf([true], "Please agree to terms of use")
   });
   
@@ -19,6 +20,7 @@ const formSchema = yup.object().shape({
       name: "",
       email: "",
       password: "",
+      role: "",
       terms: false
     });
   
@@ -37,6 +39,7 @@ const formSchema = yup.object().shape({
       name: "",
       email: "",
       password: "",
+      role: "",
       terms: ""
     });
   
@@ -126,12 +129,22 @@ const formSchema = yup.object().shape({
             <p className="error">{errorState.password}</p>
           ) : null}
         </label>
-        <input 
-          type="checkbox"
-          id="passShow"
-          className="passButton">
-              Hide
-            </input>
+        <label htmlFor="roles">
+            What is your role?
+            <select
+            value={formState.role}
+            name="role"
+            id="roles"
+            onChange={inputChange}
+            >
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Admin">Admin</option>
+            </select>
+            {errorState.role.length > 0 ? (
+            <p className="error">{errorState.role}</p>
+            ) : null}
+        </label>
         <div>
         <label htmlFor="terms" className='terms'>
           <input

@@ -2,11 +2,24 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(211, 211, 211, 0.5);
+  padding: 50px 25px 75px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(200, 200, 200, 1);
+  border: 2px solid lightgrey;
+  width: 25%;
 }
-input,
+
+input {
+  padding-left: 15px;
+  width: 285px;
+  height: 25px;
+  border: 1px solid grey;
+}
+
 select {
   width: 300px;
-  height: 25px;
+  height: 30px;
   border: 1px solid grey;
 }
 
@@ -30,31 +43,4 @@ label {
 .error {
   color: red;
   margin-top: 0;
-}
-
-.passwordContainer {
-  width: 300px;
-  height: 30px;
-  border: 1px solid grey;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.password {
-  width: 240px;
-  height: 20px;
-  border: none;
-  padding-left: 10px;
-}
-
-.password:active,
-.password:focus {
-  border: none;
-  outline: none;
-}
-
-.passButton {
-  width: 40px;
-  height: 20px;
 }
