@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import "./Form.css";
+import UserChunk from "./UserChunk.js";
 
 const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
@@ -83,16 +84,13 @@ const formSchema = yup.object().shape({
       axios
         .post("https://reqres.in/api/users", formState)
         .then(response => {
-            setUser([...user, response]);
-            // alert(`Thank you ${formState.name} for joining!`);
-            // let data = JSON.stringify(response, null, 2);
-            // document.querySelector(".jsonContainer").innerHTML(data);
-            // setFormState({
-            //     name: "",
-            //     email: "",
-            //     password: "",
-            //     terms: false
-            //   });
+            setUser([...user, response.data]);
+            setFormState({
+                name: "",
+                email: "",
+                password: "",
+                terms: false
+              });
         })
         .catch(err => console.log(err));
     };
@@ -175,9 +173,8 @@ const formSchema = yup.object().shape({
         <button disabled={buttonDisabled}>Submit</button>
         
       </form>
-      <pre className="data">
-            <code>{JSON.stringify(user, null, 2)}</code>
-        </pre>
+      <UserChunk user={user} />
+      
     </div>
       
     );
