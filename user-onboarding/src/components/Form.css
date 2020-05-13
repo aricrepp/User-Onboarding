@@ -10,6 +10,13 @@ form {
   width: 25%;
 }
 
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 input {
   padding-left: 15px;
   width: 285px;
@@ -43,4 +50,10 @@ label {
 .error {
   color: red;
   margin-top: 0;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

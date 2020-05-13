@@ -26,7 +26,7 @@ const formSchema = yup.object().shape({
   
     // BONUS!: state for whether our button should be disabled or not.
     const [buttonDisabled, setButtonDisabled] = useState(true);
-    const [passState, setPassState] = useState('password');
+    const [user, setUser] = useState([]);
     // Everytime formState changes, check to see if it passes verification.
     // If it does, then enable the submit button, otherwise disable
     useEffect(() => {
@@ -34,6 +34,10 @@ const formSchema = yup.object().shape({
         setButtonDisabled(!valid);
       });
     }, [formState]);
+
+    // useEffect(() => {
+
+    // }, [user]);
   
     const [errorState, setErrorState] = useState({
       name: "",
@@ -79,19 +83,23 @@ const formSchema = yup.object().shape({
       axios
         .post("https://reqres.in/api/users", formState)
         .then(response => {
-            alert(`Thank you ${formState.name} for joining!`);
-            setFormState({
-                name: "",
-                email: "",
-                password: "",
-                terms: false
-              });
+            setUser([...user, response]);
+            // alert(`Thank you ${formState.name} for joining!`);
+            // let data = JSON.stringify(response, null, 2);
+            // document.querySelector(".jsonContainer").innerHTML(data);
+            // setFormState({
+            //     name: "",
+            //     email: "",
+            //     password: "",
+            //     terms: false
+            //   });
         })
         .catch(err => console.log(err));
     };
   
     return (
-      <form onSubmit={formSubmit}>
+    <div className="formContainer">
+    <form onSubmit={formSubmit}>
         <label htmlFor="name">
           Name
           <input
@@ -121,7 +129,7 @@ const formSchema = yup.object().shape({
             className="password"
             name="password"
             id="password"
-            type={passState}
+            type='password'
             value={formState.password}
             onChange={inputChange}
           /> 
@@ -137,6 +145,7 @@ const formSchema = yup.object().shape({
             id="roles"
             onChange={inputChange}
             >
+            <option value="Blank"></option>
             <option value="Student">Student</option>
             <option value="Teacher">Teacher</option>
             <option value="Admin">Admin</option>
@@ -164,7 +173,13 @@ const formSchema = yup.object().shape({
         </div>
         
         <button disabled={buttonDisabled}>Submit</button>
+        
       </form>
+      <pre className="data">
+            <code>{JSON.stringify(user, null, 2)}</code>
+        </pre>
+    </div>
+      
     );
   }
   
