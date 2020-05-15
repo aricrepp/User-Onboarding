@@ -82,6 +82,7 @@ describe("Testing our form inputs", () => {
         cy.get('input[type="checkbox"]').check().should("be.checked");
 
         cy.get("form").submit();
-        
+
+       
     });
 });
