@@ -83,6 +83,8 @@ describe("Testing our form inputs", () => {
 
         cy.get("form").submit();
 
-       
+        cy.get('.users')
+        .should('exist')
+        
     });
 });
